@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anas Jamil | Data Analytics Manager in fintech</title>
+<meta name="description" content="Anas Jamil, Data Analytics Manager in fintech. Regulatory reporting, payments and transaction data, BI, and AI tooling for regulated environments. Five worked projects on synthetic data.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#work">Skip to projects</a>
+
+<header class="top">
+  <div class="wrap">
+    <p class="eyebrow">Karachi, Pakistan</p>
+    <h1>Anas Jamil</h1>
+    <p class="lead">Data Analytics Manager in fintech, working in SQL, Python and Power BI on payments and transaction data, regulatory reporting and BI.</p>
+    <p>Most of the job isn't the query. It's finding the question underneath the request, because two teams can ask for "active users" and mean two different things, and whichever one you answer first becomes the number everybody quotes for the next year.</p>
+    <nav class="links" aria-label="Profiles">
+      <a href="https://github.com/anasjamil98">GitHub</a>
+      <a href="https://www.linkedin.com/in/anasjamilaj">LinkedIn</a>
+      <a href="mailto:anas_jamil@live.com">anas_jamil@live.com</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="wrap" aria-labelledby="now">
+    <h2 id="now">What takes up most of my week</h2>
+    <div class="three">
+      <article>
+        <h3>Regulatory reporting</h3>
+        <p>I build and automate the data behind our central-bank submissions. Compliance files them, I make sure what they're filing is right. It used to be assembled by hand, and that's the kind of process that fails on the month you can't afford it to.</p>
+        <p class="more"><a href="#p-regulatory">The same problem, rebuilt on invented data</a></p>
+      </article>
+      <article>
+        <h3>AI tooling</h3>
+        <p>I own the AI query assistant our data team runs on, approved by our Head of Data. It sits on an aliased warehouse layer so the model never sees real table names or customer data, an approach I took to our security team before we built anything. The context engineering is mine.</p>
+        <p class="more"><a href="#p-assistant">The pattern, small enough to read</a></p>
+      </article>
+      <article>
+        <h3>Definitions</h3>
+        <p>MAU, DAU, TPV, wallet states. I built the source-of-truth tables and the documentation behind them, because that knowledge was living in two people's heads.</p>
+        <p class="more"><a href="#p-metrics">One question, six answers</a></p>
+      </article>
+    </div>
+  </section>
+
+  <section class="wrap" id="work" aria-labelledby="work-title">
+    <h2 id="work-title">Projects</h2>
+    <p class="note">None of this is my employer's code or data. Each project takes a problem I work on and rebuilds the approach from scratch, on synthetic data for a fictional digital wallet, so anyone can read it and run it. Every repo has tests, and every README has a section on what went wrong or what I'd change.</p>
+
+    <article class="project" id="p-regulatory">
+      <header>
+        <h3>regulatory-return-automation</h3>
+        <p class="tags">SQL · Python · Excel output · 14 tests</p>
+      </header>
+      <p>A monthly regulatory return built by a pipeline that refuses to produce the file when the numbers can't be trusted. Ten blocking controls and one review warning run before anything is written. The headline total is recomputed by a second route that shares no code with the first.</p>
+      <ul>
+        <li>Blocked runs write no file and still leave an audit record of what was stopped and why.</li>
+        <li>A line that moved a lot since last month doesn't block the return. It's flagged inside the workbook, where whoever files it will see it.</li>
+        <li>Money stays in integers end to end, so totals reconcile exactly.</li>
+      </ul>
+      <p class="more"><a href="https://github.com/anasjamil98/regulatory-return-automation">Read the repo</a></p>
+    </article>
+
+    <article class="project" id="p-assistant">
+      <header>
+        <h3>aliased-sql-assistant</h3>
+        <p class="tags">Context engineering · SQL guardrails · eval harness · 40 tests</p>
+      </header>
+      <p>A text-to-SQL assistant that never sees a real table name, a real column name or a row of data. The context file is written by hand and tested like code, so it can't quietly fall behind the schema.</p>
+      <ul>
+        <li>Of 18 candidate answers, 8 are stopped by guardrails and 4 pass every guardrail and are still wrong. Those four are the reason golden answers exist.</li>
+        <li>One query returns the right answer and is blocked anyway, because it would scan the whole table.</li>
+        <li>No network calls and no API keys. It works with any model.</li>
+      </ul>
+      <p>Getting AI into a regulated environment turns out to be an architecture problem, not a prompting one.</p>
+      <p class="more"><a href="https://github.com/anasjamil98/aliased-sql-assistant">Read the repo</a></p>
+    </article>
+
+    <article class="project" id="p-metrics">
+      <header>
+        <h3>metrics-source-of-truth</h3>
+        <p class="tags">Metric contracts · gold tables · daily alert · 16 tests</p>
+      </header>
+      <p>One written definition per metric, gold tables built from those definitions, and a daily alert that reads the same tables everyone else does. The same "monthly active users" question gives six defensible answers on this data. The dangerous ones are the answers that are only 1.8% apart.</p>
+      <ul>
+        <li>The documentation is generated from the same registry the tables are built from, and a test fails if they drift.</li>
+        <li>The first version of the alert flagged 77 days in ten months. The third flags 8 in a year, and the README explains what changed.</li>
+      </ul>
+      <p class="more"><a href="https://github.com/anasjamil98/metrics-source-of-truth">Read the repo</a></p>
+    </article>
+
+    <article class="project" id="p-review">
+      <header>
+        <h3>year-in-review-etl</h3>
+        <p class="tags">SQL window functions · validation · 16 tests</p>
+      </header>
+      <p>Turns a year of transactions into one personalised summary per customer, and decides what to do about the customers a summary doesn't fit: the ones who joined three weeks ago, made one payment, or did nothing at all.</p>
+      <ul>
+        <li>Four card variants, and one rule behind them: never show a number that would embarrass us.</li>
+        <li>Every metric is computed twice, by two implementations that share nothing, and the two have to agree.</li>
+        <li>If validation fails, no cards are written.</li>
+      </ul>
+      <p class="more"><a href="https://github.com/anasjamil98/year-in-review-etl">Read the repo</a></p>
+    </article>
+
+    <article class="project" id="p-dashboard">
+      <header>
+        <h3>single-file-exec-dashboard</h3>
+        <p class="tags">Python build · plain HTML, CSS and JavaScript · 14 tests</p>
+      </header>
+      <p>An interactive leadership dashboard that's one 88 KB HTML file. No login, no server, no install. It holds aggregates only, folds small cells before the data is written, and the build fails if the file references anything external.</p>
+      <p class="more">
+        <a href="demo/dashboard.html">Open the dashboard full screen</a>
+        <a href="https://github.com/anasjamil98/single-file-exec-dashboard">Read the repo</a>
+      </p>
+      <iframe src="demo/dashboard.html" title="Live demo of the single-file dashboard, built on synthetic data" loading="lazy"></iframe>
+    </article>
+  </section>
+
+  <section class="wrap" aria-labelledby="exp">
+    <h2 id="exp">Experience</h2>
+
+    <article class="role">
+      <header>
+        <h3>Data Analytics Manager, NayaPay</h3>
+        <p class="when">Oct 2025 to present · Karachi</p>
+      </header>
+      <p>Data lead for Compliance and Marketing, supporting Product and Finance alongside my manager. Request lifecycle from same-day queries through to multi-month builds.</p>
+      <ul>
+        <li>Build and automate the data behind our central-bank (SBP) regulatory submissions. Reports that were assembled by hand each month or quarter now run on scheduled pipelines, so Compliance files from a consistent source.</li>
+        <li>Own the AI query assistant the data team runs on, approved by the Head of Data. I handle the context engineering and the business logic that makes its output correct, and keep both current as tables and business rules change.</li>
+        <li>Designed the source-of-truth tables and documentation for core metrics on my own initiative, so every report draws on the same definitions.</li>
+        <li>Led the data architecture and ETL for NayaPay Rewind 2025, the personalised year-in-review campaign, including the edge cases so new and inactive users got an accurate Rewind too.</li>
+        <li>Built leadership-facing BI, including a daily performance alert backed by a gold-layer table and an interactive single-file dashboard for executives, showing aggregated data only.</li>
+      </ul>
+    </article>
+
+    <article class="role">
+      <header>
+        <h3>Senior Business Intelligence Analyst, eZhire</h3>
+        <p class="when">Aug 2023 to Oct 2025 · GCC market · promoted from BI Analyst in Aug 2024</p>
+      </header>
+      <ul>
+        <li>50+ dashboards in Power BI and Looker Studio for C-level readers.</li>
+        <li>Manual effort down 70% once I'd automated the recurring reporting.</li>
+        <li>Data quality up 25% after the SOPs were rebuilt.</li>
+        <li>Sales, CS and Recovery got 80% better performance visibility.</li>
+        <li>Employee of the Month, twice.</li>
+      </ul>
+      <p class="aside">The dashboards themselves belong to eZhire, so they aren't shown here.</p>
+    </article>
+
+    <article class="role">
+      <header>
+        <h3>Technical Business Analyst, Wavetec</h3>
+        <p class="when">Jan 2022 to Aug 2023 · Karachi, on LATAM clients</p>
+      </header>
+      <p>Deployed and supported product rollouts for banks including HSBC, Banorte and BBVA. Wrote SRS documentation and ran UAT across 5 client environments, cutting request-to-delivery time by 50%. Databases first, dashboards later.</p>
+    </article>
+
+    <article class="role">
+      <header>
+        <h3>BSc Mechatronics Engineering, Sabanci University</h3>
+        <p class="when">Istanbul · Energy minor · on scholarship · Dean's List High Honour</p>
+      </header>
+    </article>
+  </section>
+
+  <section class="wrap" aria-labelledby="tools">
+    <h2 id="tools">What I work in</h2>
+    <dl class="tools">
+      <dt>Every day</dt><dd>SQL, Trino, Python, Jupyter, pandas</dd>
+      <dt>BI</dt><dd>Power BI, Looker Studio, Excel</dd>
+      <dt>Practice</dt><dd>Regulatory reporting, ETL, data modelling, data quality, metric governance, context engineering</dd>
+      <dt>Domain</dt><dd>Fintech, payments and transaction data</dd>
+    </dl>
+  </section>
+</main>
+
+<footer class="wrap">
+  <p><a href="mailto:anas_jamil@live.com">anas_jamil@live.com</a> · <a href="https://www.linkedin.com/in/anasjamilaj">LinkedIn</a> · <a href="https://github.com/anasjamil98">GitHub</a></p>
+  <p class="fine">Views here are my own and not my employer's. All project data is synthetic. This site sets no cookies and loads no trackers, analytics or third-party files.</p>
+</footer>
+</body>
+</html>
